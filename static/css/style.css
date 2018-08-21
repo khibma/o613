@@ -1,0 +1,8 @@
+
+
+li { 
+    background: grey; 
+}
+li:nth-child(odd) {
+     background: rgb(41, 34, 34);
+}
