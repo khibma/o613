@@ -10,52 +10,60 @@
 
    <body>
    
-    <h1>{{ infos.clan }} </h1>
-    <h3>{{ infos.description }}</h3>
-    <h3>Current Members</h3>
-    <ul>
-      {% for person in members: %}
-          <li><a href="/user/{{ person }}">{{ person }}</a></li>
-      {% endfor %}
-    </ul>
-
-
-    <table>
-        {% for key, value in infos.items() %}
-        
-           <tr>
-              <th> {{ key }} </th>
-              <td> {{ value }} </td>
-           </tr>
-           
-        {% endfor %}
+    <h1>{{ everything.name }}</h1>
+    <h4>{{ everything.description }}</h4>
+    
+    <table>      
+        <tr>
+            <th>  Required Trophies:</th>
+            <td> {{ everything.requiredTrophies }} </td>
+        </tr>
+        <tr>
+            <th>  Weekly Donations:</th>
+            <td> {{ everything.donationsPerWeek }} </td>
+         </tr>
+            <tr>
+                <th>  Total members:</th>
+                <td> {{ everything.members }} </td>
+            </tr>
     </table>
 <!-- https://getbootstrap.com/docs/4.0/components/list-group/ -->
     <div class="row">
         <div class="col-4">
             <div class="list-group" id="list-tab" role="tablist">
-                {% for person in members: %}
+                {% for person in everything.memberList: %}
                   {% if loop.index0 ==0: %}
-                    <a class="list-group-item list-group-item-action active" id="list-{{ person }}-list" data-toggle="list" href="#list-{{ person }}" role="tab" aria-controls="{{ person }}">{{ person }}</a>
+                    <a class="list-group-item list-group-item-action active" id="list-{{ person.name }}-list" data-toggle="list" href="#list-{{ person.name }}" role="tab" aria-controls="{{ person.name }}">{{ person.name }}</a>
                   {%else%}
-                    <a class="list-group-item list-group-item-action" id="list-{{ person }}-list" data-toggle="list" href="#list-{{ person }}" role="tab" aria-controls="{{ person }}">{{ person }}</a>
+                    <a class="list-group-item list-group-item-action" id="list-{{ person.name }}-list" data-toggle="list" href="#list-{{ person.name }}" role="tab" aria-controls="{{ person.name }}">{{ person.name }}</a>
                   {%endif%}
                 {% endfor %}
             </div>
         </div>
         <div class="col-8">
             <div class="tab-content" id="nav-tabContent">
-                {% for person in members: %}                
+                {% for person in everything.memberList: %}                
                   {% if loop.index0 ==0: %}
-                   <div class="tab-pane fade show active" id="list-{{ person }}" role="tabpanel" aria-labelledby="list-{{ person }}-list">some info</div>
+                  
+                   <div class="tab-pane fade show active" id="list-{{ person.name }}" role="tabpanel" aria-labelledby="list-{{ person.name }}-list">
+                       role: {{ person.role }}, trophies: {{ person.trophies }}, level: {{ person.expLevel }}, donations: {{ person.donations}}</div>
                   {%else%}  
-                   <div class="tab-pane fade" id="list-{{ person }}" role="tabpanel" aria-labelledby="list-{{ person }}-list">...</div>
+                   <div class="tab-pane fade" id="list-{{ person.name }}" role="tabpanel" aria-labelledby="list-{{ person.name }}-list">
+                        role: {{ person.role }}, trophies: {{ person.trophies }}, level: {{ person.expLevel }}, donations: {{ person.donations}}</div>
                   {%endif%}
                 {% endfor %}
 
             </div>
         </div>
     </div>
-      
+    
+    <h3>Current Members</h3>
+    <ul>
+            
+      {% for person in members: %}
+          <li><a href="/user/{{ person }}">{{ person }}</a></li>
+      {% endfor %}
+    </ul>
+
    </body>
 </html>
