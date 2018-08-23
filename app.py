@@ -23,7 +23,7 @@ print(CR)
 
 @app.route('/')
 def index(memList=memList, everything=CR):
-   return render_template('index.html', members=memList, everything=CR.clanInfo)
+   return render_template('index.html', members=memList, everything=CR.clanInfo, t=CR.token)
 
 @app.route('/user/<user>')
 def userRender(user):
@@ -31,4 +31,5 @@ def userRender(user):
 
 if __name__ == '__main__':
 
-   app.run(debug = True)
+   #app.run(debug = True)
+   app.run(host='0.0.0.0')
