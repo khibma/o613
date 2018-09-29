@@ -1,32 +1,37 @@
-<!doctype html>
-<html>
-    <head>
-        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </head>
 
-   <body>
-   
-    <h1>{{ everything.name }}</h1>
-    <h4>{{ everything.description }}</h4>
-    
-    <table>      
-        <tr>
-            <th>  Required Trophies:</th>
-            <td> {{ everything.requiredTrophies }} </td>
-        </tr>
-        <tr>
-            <th>  Weekly Donations:</th>
-            <td> {{ everything.donationsPerWeek }} </td>
-         </tr>
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron" style="padding-bottom: 1rem;">
+    <div class="container">
+        <h1 class="display-3">{{ everything.name }}</h1>
+        <p>{{ everything.description }}</p>
+          
+        <table>      
+            <tr>
+                <th>  Required Trophies:</th>
+                <td> {{ everything.requiredTrophies }} </td>
+            </tr>
+            <tr>
+                <th>  Weekly Donations:</th>
+                <td> {{ everything.donationsPerWeek }} </td>
+            </tr>
             <tr>
                 <th>  Total members:</th>
                 <td> {{ everything.members }} </td>
             </tr>
-    </table>
+            <tr>
+                <th>  Join Status:</th>
+                <td> {{ everything.type }} </td>
+            </tr>
+                
+        </table>
+    </div>
+</div>
+
+<div class="container">
+     
 <!-- https://getbootstrap.com/docs/4.0/components/list-group/ -->
     <div class="row">
         <div class="col-4">
@@ -46,24 +51,20 @@
                   {% if loop.index0 ==0: %}
                   
                    <div class="tab-pane fade show active" id="list-{{ person.name }}" role="tabpanel" aria-labelledby="list-{{ person.name }}-list">
-                       role: {{ person.role }}, trophies: {{ person.trophies }}, level: {{ person.expLevel }}, donations: {{ person.donations}}</div>
+                       role: {{ person.role }}, trophies: {{ person.trophies }}, level: {{ person.expLevel }}, donations: {{ person.donations}}
+                       <br> <a href="/user/{{ person.name}}">Player Info</a> 
+                    </div>
                   {%else%}  
                    <div class="tab-pane fade" id="list-{{ person.name }}" role="tabpanel" aria-labelledby="list-{{ person.name }}-list">
-                        role: {{ person.role }}, trophies: {{ person.trophies }}, level: {{ person.expLevel }}, donations: {{ person.donations}}</div>
+                        role: {{ person.role }}, trophies: {{ person.trophies }}, level: {{ person.expLevel }}, donations: {{ person.donations}} 
+                        <br> <a href="/user/{{ person.name}}">Player Info</a> 
+                    </div>
                   {%endif%}
                 {% endfor %}
 
             </div>
         </div>
     </div>
-    
-    <h3>Current Members</h3>
-    <ul>
-            
-      {% for person in members: %}
-          <li><a href="/user/{{ person }}">{{ person }}</a></li>
-      {% endfor %}
-    </ul>
-<!- {{ t}}- -->
-   </body>
-</html>
+</div>
+
+{% endblock %}

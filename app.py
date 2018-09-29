@@ -1,35 +1,40 @@
 from flask import Flask, render_template
 app = Flask(__name__)
 
-stuff = {"clan":"xxx",
-        "rank":5,
-        "members":3,
-        "trophies": 10,
-        "description": "a description"}
-
-memList = ["fred", "Bob", "Steve"]
 
 import configparser
 import os, sys
+from sys import platform
+import datetime
 config = configparser.ConfigParser()
 config.read(os.path.join(sys.path[0],"clash/settings.ini"))
-token = config.get("CLASH", "token")    
+tokenLocal = config.get("CLASH", "tokenLocal")    
+tokenAzure = config.get("CLASH", "tokenAzure")    
 clanID = config.get("CLASH", "clanID")    
 
 sys.path.append(os.path.join(sys.path[0], "clash"))
 import clash
-CR = clash.clash(token, clanID)
+t = tokenAzure if platform != "win32" else tokenLocal
+
+CR = clash.clash(t, clanID)
 print(CR)
 
 @app.route('/')
-def index(memList=memList, everything=CR):
-   return render_template('index.html', members=memList, everything=CR.clanInfo, t=CR.token)
+def index(everything=CR):
+   #CI = CR.getClanInfo()
+   #print(CI)
+   if (datetime.datetime.now() - CR.updateTime).seconds > 120:
+        CR.getClanInfo()
+        CR.updateTime = datetime.datetime.now()
+   return render_template('index.html', everything=CR.clanInfo, t=CR.token, updatetime=CR.updateTime.strftime("%Y-%m-%d %H:%M"))
 
 @app.route('/user/<user>')
 def userRender(user):
-   return render_template('user.html', user = user)
+   playerInfo = CR.getPlayerInfo(user)
+        
+   return render_template('user.html', user = user, pi = playerInfo, everything=CR, updatetime=CR.updateTime)
 
 if __name__ == '__main__':
 
-   #app.run(debug = True)
-   app.run(host='0.0.0.0')
+   app.run(debug = True)
+   #app.run(host='0.0.0.0')
