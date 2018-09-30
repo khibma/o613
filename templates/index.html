@@ -52,12 +52,12 @@
                   
                    <div class="tab-pane fade show active" id="list-{{ person.name }}" role="tabpanel" aria-labelledby="list-{{ person.name }}-list">
                        role: {{ person.role }}, trophies: {{ person.trophies }}, level: {{ person.expLevel }}, donations: {{ person.donations}}
-                       <br> <a href="/user/{{ person.name}}">Player Info</a> 
+                       <a href="{{ url_for('userRender', u=person.tag)}}">Player Info</a>
                     </div>
                   {%else%}  
                    <div class="tab-pane fade" id="list-{{ person.name }}" role="tabpanel" aria-labelledby="list-{{ person.name }}-list">
                         role: {{ person.role }}, trophies: {{ person.trophies }}, level: {{ person.expLevel }}, donations: {{ person.donations}} 
-                        <br> <a href="/user/{{ person.name}}">Player Info</a> 
+                        <a href="{{ url_for('userRender', u=person.tag)}}">Player Info</a>
                     </div>
                   {%endif%}
                 {% endfor %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
@@ -21,18 +21,18 @@ print(CR)
 
 @app.route('/')
 def index(everything=CR):
-   #CI = CR.getClanInfo()
-   #print(CI)
+
    if (datetime.datetime.now() - CR.updateTime).seconds > 120:
         CR.getClanInfo()
         CR.updateTime = datetime.datetime.now()
    return render_template('index.html', everything=CR.clanInfo, t=CR.token, updatetime=CR.updateTime.strftime("%Y-%m-%d %H:%M"))
 
-@app.route('/user/<user>')
-def userRender(user):
-   playerInfo = CR.getPlayerInfo(user)
+@app.route('/user/<u>')
+def userRender(u):
+   
+   playerInfo = CR.getPlayerInfo(u)
         
-   return render_template('user.html', user = user, pi = playerInfo, everything=CR, updatetime=CR.updateTime)
+   return render_template('user.html', pi = playerInfo, clanName=CR.clanName, updatetime=CR.updateTime.strftime("%Y-%m-%d %H:%M"))
 
 if __name__ == '__main__':
 

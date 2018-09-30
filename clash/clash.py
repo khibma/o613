@@ -14,6 +14,7 @@ class clash(object):
         self.updateTime = datetime.datetime.now() 
 
         self.clanInfo = self.getClanInfo()
+        self.clanName = self.clanInfo['name']
 
     def getClanInfo(self):
 
@@ -23,10 +24,12 @@ class clash(object):
         return r.json()
 
     def getPlayerInfo(self, playerID):
-
+        playerID = playerID.strip("#")
         playerURL = "{}/players/%23{}".format(self.baseURL, playerID)
+        print(playerURL)
         r = requests.get(playerURL, headers=self.headers)
-
+        print(r)
+        print(r.json)
         return r.json()
 
     def getCards(self):

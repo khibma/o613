@@ -1,6 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-   
-      <h1>Hello {{ user }}!</h1>
-      
+<div class="jumbotron" style="padding-bottom: 1rem;">
+<div class="container">
+            <div class="row">
+                        <div class="col-12">
+      <h2>Hello {{ pi.name }}!</h2>
+
+      <ol class="list-unstyled">
+            <li> Level: {{pi.expLevel}}</li>
+            <li>Trophies: {{pi.trophies}}</li>
+            <li>Max Trophies: {{pi.bestTrophies}}</li>
+            <li>Wins: {{pi.wins}} (3 crown: {{pi.threeCrownWins}}) / Losses: {{pi.losses}} // Total Battles: {{pi.battleCount}}</li>
+            <li>Challenge Max Wins: {{pi.challengeMaxWins}} // Cards won: {{pi.challengeCardsWon}} </li>
+            <li>Role: {{pi.role}}</li>
+            <li>Total Donations: {{pi.totalDonations}}</li>
+            <li>War day wins: {{pi.warDayWins}} // Cards collected: {{pi.clanCardsCollected}}</li>
+      </ol>
+      </div>      
+      </div>      
+</div>
+</div>
 {% endblock %}
