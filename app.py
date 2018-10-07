@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request
+from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
+
 app = Flask(__name__)
 
+class ReusableForm(Form):
+    pid = TextField('PLayerID:', validators=[validators.required()])
+ 
 
 import configparser
 import os, sys
@@ -27,12 +32,28 @@ def index(everything=CR):
         CR.updateTime = datetime.datetime.now()
    return render_template('index.html', everything=CR.clanInfo, t=CR.token, updatetime=CR.updateTime.strftime("%Y-%m-%d %H:%M"))
 
-@app.route('/user/<u>')
-def userRender(u):
+@app.route('/user/', methods=['GET', 'POST'])
+@app.route('/user/<u>', methods=['GET'])
+def userRender(u=None):
    
-   playerInfo = CR.getPlayerInfo(u)
+   playerInfo = 9999
+   uchest = {'items':[]}
+
+   if not u:
+      form = ReusableForm(request.form)
+      if request.method == 'POST':
+         u = request.form['pid']
+         print(u)
+
+   #if form.validate():
+   #   playerInfo = CR.getPlayerInfo(searchPid)
+
+   if u:
+      playerInfo = CR.getPlayerInfo(u)
+      uchest = CR.getUpcomingChests(u)
+      #battle = CR.getBattleLog(u)
         
-   return render_template('user.html', pi = playerInfo, clanName=CR.clanName, updatetime=CR.updateTime.strftime("%Y-%m-%d %H:%M"))
+   return render_template('user.html', pi = playerInfo, chst=uchest['items'], clanName=CR.clanName, updatetime=CR.updateTime.strftime("%Y-%m-%d %H:%M"))
 
 if __name__ == '__main__':
 

@@ -26,10 +26,22 @@ class clash(object):
     def getPlayerInfo(self, playerID):
         playerID = playerID.strip("#")
         playerURL = "{}/players/%23{}".format(self.baseURL, playerID)
-        print(playerURL)
         r = requests.get(playerURL, headers=self.headers)
-        print(r)
-        print(r.json)
+
+        return r.json()
+
+    def getUpcomingChests(self, playerID):
+        playerID = playerID.strip("#")
+        uchestsURL = "{}/players/%23{}/upcomingchests".format(self.baseURL, playerID)
+        r = requests.get(uchestsURL, headers=self.headers)
+
+        return r.json()
+    
+    def getBattleLog(self, playerID):
+        playerID = playerID.strip("#")
+        battleURL = "{}/players/%23{}/battlelog".format(self.baseURL, playerID)
+        r = requests.get(battleURL, headers=self.headers)
+
         return r.json()
 
     def getCards(self):

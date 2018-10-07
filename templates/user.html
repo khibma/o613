@@ -1,23 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron" style="padding-bottom: 1rem;">
-<div class="container">
-            <div class="row">
-                        <div class="col-12">
-      <h2>Hello {{ pi.name }}!</h2>
-
-      <ol class="list-unstyled">
-            <li> Level: {{pi.expLevel}}</li>
-            <li>Trophies: {{pi.trophies}}</li>
-            <li>Max Trophies: {{pi.bestTrophies}}</li>
-            <li>Wins: {{pi.wins}} (3 crown: {{pi.threeCrownWins}}) / Losses: {{pi.losses}} // Total Battles: {{pi.battleCount}}</li>
-            <li>Challenge Max Wins: {{pi.challengeMaxWins}} // Cards won: {{pi.challengeCardsWon}} </li>
-            <li>Role: {{pi.role}}</li>
-            <li>Total Donations: {{pi.totalDonations}}</li>
-            <li>War day wins: {{pi.warDayWins}} // Cards collected: {{pi.clanCardsCollected}}</li>
-      </ol>
-      </div>      
-      </div>      
+  <div class="container">
+    <div class="row">
+      <div class="form-inline">
+      <form  action="" method="post" role="form">
+        <input type="text" class="form-control" id="pid" name="pid" placeholder="Enter player ID">
+        <button type="submit" class="btn btn-success">Search</button>
+      </form>
 </div>
+    </div>
+  </div> 
+{% if pi == 9999 %}
+ <!-- no player info to display -->
+{% else %}     
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>Hello {{ pi.name }}!</h2>
+
+        <ol class="list-unstyled">
+          <li>Level: {{pi.expLevel}}</li>
+          <li>Trophies: {{pi.trophies}}</li>
+          <li>Max Trophies: {{pi.bestTrophies}}</li>
+          <li>Wins: {{pi.wins}} (3 crown: {{pi.threeCrownWins}}) / Losses: {{pi.losses}} // Total Battles: {{pi.battleCount}}</li>
+          <li>Challenge Max Wins: {{pi.challengeMaxWins}} // Cards won: {{pi.challengeCardsWon}} </li>
+          <li>Role: {{pi.role}}</li>
+          <li>Total Donations: {{pi.totalDonations}}</li>
+          <li>War day wins: {{pi.warDayWins}} // Cards collected: {{pi.clanCardsCollected}}</li>
+        </ol>
+        {% if chst %}
+        <h4>Upcoming chests</h4>
+        <ul>
+        {% for c in chst: %}
+            <li>{{ c.index+1}} - {{ c.name }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+      </div>      
+    </div>      
+  </div>
+{% endif %}
 </div>
 {% endblock %}
