@@ -28,7 +28,7 @@ print(CR)
 def index(everything=CR):
 
    if (datetime.datetime.now() - CR.updateTime).seconds > 120:
-        CR.getClanInfo()
+        CR.clanInfo = CR.getClanInfo()        
         CR.updateTime = datetime.datetime.now()
    return render_template('index.html', everything=CR.clanInfo, t=CR.token, updatetime=CR.updateTime.strftime("%Y-%m-%d %H:%M"))
 
@@ -57,5 +57,5 @@ def userRender(u=None):
 
 if __name__ == '__main__':
 
-   app.run(debug = True)
-   #app.run(host='0.0.0.0')
+   #app.run(debug = True)
+   app.run(host='0.0.0.0')

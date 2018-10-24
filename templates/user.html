@@ -31,11 +31,11 @@
         </ol>
         {% if chst %}
         <h4>Upcoming chests</h4>
-        <ul>
+        <ol>
         {% for c in chst: %}
-            <li>{{ c.index+1}} - {{ c.name }}</li>
+          <li value="{{ c.index+1}}">{{ c.name }}</li>
         {% endfor %}
-        </ul>
+        </ol>
         {% endif %}
       </div>      
     </div>      

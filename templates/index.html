@@ -4,25 +4,25 @@
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron" style="padding-bottom: 1rem;">
-    <div class="container">
+    <div class="container table-responsive">
         <h1 class="display-3">{{ everything.name }}</h1>
         <p>{{ everything.description }}</p>
           
-        <table>      
+        <table class="Table" style="width:80%">      
             <tr>
-                <th>  Required Trophies:</th>
+                <th style="width:40%">Required Trophies:</th>
                 <td> {{ everything.requiredTrophies }} </td>
             </tr>
             <tr>
-                <th>  Weekly Donations:</th>
+                <th style="width:40%">Weekly Donations:</th>
                 <td> {{ everything.donationsPerWeek }} </td>
             </tr>
             <tr>
-                <th>  Total members:</th>
+                <th style="width:40%">Total members:</th>
                 <td> {{ everything.members }} </td>
             </tr>
             <tr>
-                <th>  Join Status:</th>
+                <th style="width:40%">Join Status:</th>
                 <td> {{ everything.type }} </td>
             </tr>
                 
@@ -35,7 +35,8 @@
 <!-- https://getbootstrap.com/docs/4.0/components/list-group/ -->
     <div class="row">
         <div class="col-7">
-            <div class="list-group d-flex flex-row flex-wrap" id="list-tab" role="tablist">
+            <div class="list-group d-flex flex-row flex-wrap" id="list-tab" role="tablist"
+             style="max-height: 200px; overflow-x: hidden;">             
                 {% for person in everything.memberList: %}
                   {% if loop.index0 ==0: %}  
                     <a class="list-group-item list-group-item-action w-33 active" id="list-{{ person.name }}-list" data-toggle="list" href="#list-{{ person.name }}" role="tab" aria-controls="{{ person.name }}">{{loop.index0+1}}-{{ person.name }}</a>
@@ -46,18 +47,30 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="col-5">
+        <div class="col-5 border border-primary rounded" style="padding: 20px;">
             <div class="tab-content" id="nav-tabContent">
                 {% for person in everything.memberList: %}                
                   {% if loop.index0 ==0: %}
                   
-                   <div class="tab-pane fade show active" id="list-{{ person.name }}" role="tabpanel" aria-labelledby="list-{{ person.name }}-list">
-                       role: {{ person.role }}, trophies: {{ person.trophies }}, level: {{ person.expLevel }}, donations: {{ person.donations}}
-                       <a href="{{ url_for('userRender', u=person.tag)}}">Player Info</a>
+                   <div class="tab-pane fade show active" id="list-{{ person.name }}"
+                    role="tabpanel" aria-labelledby="list-{{ person.name }}-list">
+                    <ul>
+                       <li>role: {{ person.role }}</li>
+                       <li>trophies: {{ person.trophies }}</li>
+                       <li>level: {{ person.expLevel }}</li>
+                       <li>donations: {{ person.donations}}</li>
+                    </ul>
+                    <a href="{{ url_for('userRender', u=person.tag)}}">Player Info</a>
                     </div>
                   {%else%}  
-                   <div class="tab-pane fade" id="list-{{ person.name }}" role="tabpanel" aria-labelledby="list-{{ person.name }}-list">
-                        role: {{ person.role }}, trophies: {{ person.trophies }}, level: {{ person.expLevel }}, donations: {{ person.donations}} 
+                   <div class="tab-pane fade" id="list-{{ person.name }}" role="tabpanel"
+                    aria-labelledby="list-{{ person.name }}-list">
+                    <ul>
+                        <li>role: {{ person.role }}</li>
+                        <li>trophies: {{ person.trophies }}</li>
+                        <li>level: {{ person.expLevel }}</li>
+                        <li>donations: {{ person.donations}}</li>
+                    </ul>
                         <a href="{{ url_for('userRender', u=person.tag)}}">Player Info</a>
                     </div>
                   {%endif%}
