@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron" style="padding-bottom: 1rem;">
+  <h2>War Log</h2>
+  <div class="container">
+    {% for war in wl: %}
+    <ul>
+     {% for s in war.standings %}
+      {% if s.clan.name == clanName%}       
+        <li>Count in war: {{ s.clan.participants }}</li>
+        <li>Battles played: {{ s.clan.battlesPlayed }}</li>
+        <li>Wins: {{ s.clan.wins }}</li>
+        <li>Crowns: {{ s.clan.crowns }}</li>
+        <li>Trophies: <strong>{{s.trophyChange}}</strong></li>
+      {% endif %}        
+     {% endfor %}
+     <li>Didn't battle: 
+     {% for p in war.participants %}
+        {% if p.battlesPlayed == 0 %}  
+          {{ p.name }},
+        {% endif %}   
+     {% endfor %}
+     </li>
+    </ul>
+    {% endfor %}
+  </div> 
+   
+  <div class="container">
+    
+  </div>
+
+</div>
+{% endblock %}

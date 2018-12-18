@@ -7,7 +7,7 @@
     <div class="container table-responsive">
         <h1 class="display-3">{{ everything.name }}</h1>
         <p>{{ everything.description }}</p>
-          
+        
         <table class="Table" style="width:80%">      
             <tr>
                 <th style="width:40%">Required Trophies:</th>
@@ -32,10 +32,9 @@
             <tr>
                 <th style="width:40%">Clan Trophies:</th>
                 <td> {{ everything.clanScore }} </td>
-            </tr>
-            
-                
+            </tr>        
         </table>
+        <p> <a href="{{ url_for('warLogRender')}}">War Log</a></p>
     </div>
 </div>
 

@@ -11,7 +11,7 @@ class clash(object):
         self.baseURL = "https://api.clashroyale.com/v1"
         self.headers = headers = {'authorization': self.token,
                                  'Accept': "application/json"}
-        self.updateTime = datetime.datetime.now() 
+        self.updateTime = datetime.datetime.now()
 
         self.clanInfo = self.getClanInfo()
         self.clanName = self.clanInfo['name']
@@ -20,6 +20,12 @@ class clash(object):
 
         clanURL = "{}/clans/{}".format(self.baseURL, self.clanID)
         r = requests.get(clanURL, headers=self.headers)
+
+        return r.json()
+
+    def clanWarLog(self):
+        clanWarURL = "{}/clans/{}/warlog".format(self.baseURL, self.clanID)
+        r = requests.get(clanWarURL, headers=self.headers)
 
         return r.json()
 
@@ -51,18 +57,17 @@ class clash(object):
 
         return r.json()
 
-    def topClanWars(self, location):
-        
-        topClanURL = "{}/locations/{}/rankings/clanwars".format(self.baseURL, location)
-        r = requests.get(topClanURL, headers=self.headers)
+    def topClanWars(self, location='57000047'):
+        p = {'limit': 300}
+        topClanWarURL = "{}/locations/{}/rankings/clanwars".format(self.baseURL, location)
+        r = requests.get(topClanWarURL, headers=self.headers, params=p)
 
         return r.json()
-        
 
-    def top200Clans(self):
-        
-        topClanWarURL = "{}/locations/{}/rankings/clans".format(self.baseURL, location)
-        r = requests.get(topClanWarURL, headers=self.headers)
+    def top300Clans(self, location='57000047'):
+        p = {'limit': 300}
+        topClanURL = "{}/locations/{}/rankings/clans".format(self.baseURL, location)
+        r = requests.get(topClanURL, headers=self.headers, params = p)
 
         return r.json()
 

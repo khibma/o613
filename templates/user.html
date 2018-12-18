@@ -8,7 +8,7 @@
         <input type="text" class="form-control" id="pid" name="pid" placeholder="Enter player ID">
         <button type="submit" class="btn btn-success">Search</button>
       </form>
-</div>
+      </div>
     </div>
   </div> 
 {% if pi == 9999 %}
@@ -23,7 +23,13 @@
           <li>Level: {{pi.expLevel}}</li>
           <li>Trophies: {{pi.trophies}}</li>
           <li>Max Trophies: {{pi.bestTrophies}}</li>
-          <li>Wins: {{pi.wins}} (3 crown: {{pi.threeCrownWins}}) / Losses: {{pi.losses}} // Total Battles: {{pi.battleCount}}</li>
+          <li>Total Battles: {{pi.battleCount}} (At least {{pi.battleCount * 3 / 60}} hours played)
+            <ul>
+              <li>Wins: {{pi.wins}} (3 crown: {{pi.threeCrownWins}}) </li>
+              <li>Losses: {{pi.losses}}</li>
+              <li><i>Possible</i> Ties: {{pi.battleCount - pi.wins - pi.losses }}</li>
+            </ul>
+          </li>
           <li>Challenge Max Wins: {{pi.challengeMaxWins}} // Cards won: {{pi.challengeCardsWon}} </li>
           <li>Role: {{pi.role}}</li>
           <li>Total Donations: {{pi.totalDonations}}</li>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron" style="padding-bottom: 1rem;">
+  <h2>Top 300 ClanWars (Canada)</h2>
+  <div class="container">
+    <ol>
+        {% for c in t['items']: %}
+        <li value="{{ c.rank }}">{{ c.name }} -- {{ c.clanScore}}
+            {% if c.rank < c.previousRank %} <font color="green">&uarr;</font>
+            {% elif c.rank > c.previousRank %} <font color="red">&darr;</font>
+            {% else %} &harr;
+            {% endif %}
+        </li>
+        
+        {% endfor %}
+    </ol>
+  </div> 
+   
+  <div class="container">
+    
+  </div>
+
+</div>
+{% endblock %}

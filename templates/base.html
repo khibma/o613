@@ -22,15 +22,17 @@
                         <a class="nav-link" href="{{ url_for('index')}}">Home <span class="sr-only">(current)</span></a>
                     </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('userRender')}}">> Detailed Player Info</a>
+                        <a class="nav-link" href="{{ url_for('userRender')}}"> | Detailed Player Info</a>
                     </li>
                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">CR Cards</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('top300WarRender')}}"> | Top 300 [CA] ClanWars</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Top Clans</a>
-                    </li>
-                -->
+                        <a class="nav-link" href="{{ url_for('top300ClanRender')}}"> | Top 300 [CA] Clans</a>
+                    </li>                
                 </ul>
             </div>
         </nav>

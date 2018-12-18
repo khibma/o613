@@ -35,6 +35,21 @@ def index(everything=CR):
         CR.updateTime = datetime.datetime.now()
    return render_template('index.html', everything=CR.clanInfo, t=CR.token, updatetime=fixTime(CR.updateTime))
 
+@app.route('/top300war')
+def top300WarRender():
+  top = CR.topClanWars()
+  return render_template('top300war.html', t=top, clanName=CR.clanName)
+
+@app.route('/top300clans')
+def top300ClanRender():
+  top = CR.top300Clans()
+  return render_template('top300.html', t=top, clanName=CR.clanName)
+
+@app.route('/warlog')
+def warLogRender():
+  warlog = CR.clanWarLog()
+  return render_template('warlog.html', wl = warlog['items'], clanName=CR.clanName)
+
 @app.route('/user/', methods=['GET', 'POST'])
 @app.route('/user/<u>', methods=['GET'])
 def userRender(u=None):
