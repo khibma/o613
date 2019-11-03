@@ -71,7 +71,8 @@ def userRender(u=None):
       playerInfo = CR.getPlayerInfo(u)
       uchest = CR.getUpcomingChests(u)
       battle = CR.getBattleLog(u)
-
+      lb = battle[0]['battleTime']
+      lbF = lb[0:4] + " / " + lb[4:6] + " / " + lb[6:8]
       for b in battle:
           if b['type'] == "clanWarCollectionDay":
             if b['team'][0]['crowns'] > b['opponent'][0]['crowns']:
@@ -84,7 +85,7 @@ def userRender(u=None):
             else:
               warInfo['warLose'] +=1
     
-   return render_template('user.html', pi = playerInfo, w=warInfo, chst=uchest['items'], clanName=CR.clanName, updatetime=fixTime(CR.updateTime))
+   return render_template('user.html', lb = lbF, pi = playerInfo, w=warInfo, chst=uchest['items'], clanName=CR.clanName, updatetime=fixTime(CR.updateTime))
 
 if __name__ == '__main__':
 

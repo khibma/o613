@@ -1,12 +1,73 @@
-.w-33 {
+/* .w-33 {
     width: 50%!important;
-}
-
-/* 
-
-li { 
-    background: grey; 
-}
-li:nth-child(odd) {
-     background: rgb(41, 34, 34);
 } */
+
+@media only screen and (min-width: 300px) {
+
+    /* For tablets: */
+    .col-xs-4 {
+        width: 170px !important;
+    }
+
+    .w-33 {
+        width: 100% !important;
+    }
+
+    .list-group {
+        max-height: 220px !important;
+    }
+
+    .playerBox{
+        padding: 3px;
+        padding-left: 3px !important;
+    }
+
+    .smallList {
+        padding-left: 20px !important;
+    }
+
+    th,td {
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+    .w-33 {
+        width: 50% !important;
+    }
+    .list-group {
+        max-height: 160px !important;
+    }
+    .playerBox{
+        padding: 20px;
+    }
+}
+
+.playerLink {
+    display: inline-block;
+    padding: 6px;
+    border: 2px solid rgb(101, 158, 243);;
+    text-align: center;
+    box-shadow: 2px;
+}
+
+.scrollie{
+    background: rgb(101, 158, 243);
+    overflow: scroll;
+ }
+
+ .scrollie::-webkit-scrollbar {
+     width: 10px;
+ }
+
+ .scrollie::-webkit-scrollbar-track {
+     -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); 
+     border-radius: 10px;
+ }
+
+ .scrollie::-webkit-scrollbar-thumb {
+     border-radius: 10px;
+     -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.5); 
+ }
